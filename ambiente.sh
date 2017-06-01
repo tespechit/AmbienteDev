@@ -4,11 +4,8 @@ sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove -y
 sleep 3
 clear
 sudo apt install -y \
-python3-pip \
 build-essential \
 git \
-python3 \
-python3-dev \
 xclip \
 xsel \
 qt5-default \

@@ -2,10 +2,12 @@
 touch /tmp/atualiza.sh
 echo '
 #!/bin/bash
-clear
-sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove -y
-sleep 3
-clear
+sudo apt update
+sudo apt full-upgrade -y && sudo apt autoremove -y
+sudo apt install -y \
+python3-pip \
+python3 \
+python3-dev
 sudo pip3 install --upgrade pip virtualenvwrapper virtualenv
 echo "
 # configuração das variáveis de ambiente para o virtualenvwrapper
