@@ -1,5 +1,6 @@
 #!/bin/bash
-sudo apt update && sudo apt full-upgrade -y
+clear
+sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove -y
 sleep 3
 clear
 sudo apt install -y \
@@ -16,10 +17,10 @@ python-lxml \
 xvfb
 clear
 sleep 3
-sudo pip3 install --upgrade pip setuptools virtualenv virtualenvwrapper dryscrape beautifulsoup4
+sudo pip3 install --upgrade pip setuptools dryscrape beautifulsoup4
 clear
 echo "Baixar e instalar o Pycharm-community"
-read -p '\nPressione qualquer tecla para continuar: ' q
+read -p 'Pressione qualquer tecla para continuar: ' q
 touch ~/versao.py
 echo '
 import dryscrape
@@ -32,25 +33,28 @@ print(bsObj.findAll("ul", class_="g-col-12 _md-6 _sm-12 download__list-details")
 ' > ~/versao.py
 clear
 cat ~/versao.py
-echo /opt/pycharm-community-*
-read -p '\nPressione qualquer tecla para continuar: ' q
 versaoNova=`python3 ~/versao.py`
+echo 'Versão nova: '${versaoNova}
 versaoVelha=`echo /opt/pycharm-community-* | sed "s/.*-//"`
+echo 'versão velha: '${versaoVelha}
+read -p 'Pressione qualquer tecla para continuar: ' q
 if test ${versaoNova} != ${versaoVelha}; then
     wget -c https://download.jetbrains.com/python/pycharm-community-${versaoNova}.tar.gz
     sudo chmod +x pycharm-community-${versaoNova}.tar.gz
     sudo tar xvzf pycharm-community-${versaoNova}.tar.gz -C /opt/
     echo 'O Pycharm-community foi atualizado para a versão mais recente: Pycharm-community-'${versaoNova}
     echo /opt/pycharm-community-*
-read -p '\nPressione qualquer tecla para continuar: ' q
+read -p 'Pressione qualquer tecla para continuar: ' q
     sudo rm -r ~/*.tar.gz
     sudo rm -r ~/versao.py
     sleep 3
     sudo rm -r /opt/pycharm-community-${versaoVelha}
     echo 'O Pycharm-community-'${versaoVelha}' foi removido com sucesso!'
+    read -p 'Pressione qualquer tecla para continuar: ' q
     sleep 3
 else
-    echo 'Nenhuma alteração foi feita em no diretório /opt\nO Pycharm-community é a versão mais recente: Pycharm-community-'${versaoNova}
+    echo 'Nenhuma alteração foi feita em no diretório /opt
+    O Pycharm-community é a versão mais recente\n: Pycharm-community-'${versaoNova}
     sleep 3
 fi
 clear
@@ -61,7 +65,7 @@ mkdir -p ~/PycharmProjects/${projeto}
 cd ~/PycharmProjects/${projeto}
 export projeto
 clear
-read -p "Novo projeto Kivy ou Django? k p/(Kivy), d p/(Django) ou c p/(cancela)  " opcao
+read -p "Novo projeto Kivy? k p/(Kivy) ou c p/(cancela)  " opcao
 if test $opcao = 'k' || test $opcao = 'K' || test $opcao = 'kivy' || test $opcao = 'Kivy' || test $opcao = 'KIVY'; then
     sudo apt install -y \
     mercurial \
@@ -80,44 +84,19 @@ if test $opcao = 'k' || test $opcao = 'K' || test $opcao = 'kivy' || test $opcao
     libavformat-dev \
     libavcodec-dev \
     zlib1g-dev    
-    clear    
-    read -p "Se essa for a primeira instalação para um novo projeto Kivy escolha a opção 'sim' para configurar o ~/.bashrc.
-    Primeiríssima vez como Kivy? S/N " primeira
-    if test $primeira = 's' || test $primeira = 'S' || test $primeira = 'sim' || test $primeira = 'Sim' || test $primeira = 'SIM'; then 
-        echo "export WORKON_HOME=$HOME/.virtualenvs
-        export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-        export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
-        source /usr/local/bin/virtualenvwrapper.sh
-        
-        " >> ~/.bashrc
-        source ~/.bashrc
-        cat ~/.bashrc
-        read -p '\nPressione qualquer tecla para continuar: ' q
-        clear
-        virtualenv -p python3.5 $VIRTUALENVWRAPPER_HOOK_DIR/${venv}
-        ativa=$VIRTUALENVWRAPPER_HOOK_DIR/${venv}/bin/activate
-        export venv ativa
-        . ${ativa}
-        pip3 install cython==0.23
-        pip3 install --upgrade numpy kivy pygame urllib3 beautifulsoup4 lxml html5lib kivy-garden jupyter dryscrape
-        /opt/pycharm-community-*/bin/pycharm.sh ~/PycharmProjects/${projeto} &
-        sleep 3
-        jupyter notebook  ~/PycharmProjects/${projeto} &
-        exit 0
-        
-    elif test $primeira = 'n' || test $primeira = 'N' || test $primeira = 'não' || test $primeira = 'Não' || test $primeira = 'NÃO' || test $primeira = 'nao' || test $primeira = 'Nao' || test $primeira = 'NAO'; then
-        echo "A preparar o ambiente de desenvolvomento Kivy para o projeto: "${projeto}" no abiente" ${venv}
-        virtualenv -p python3.5 $VIRTUALENVWRAPPER_HOOK_DIR/${venv}
-        ativa=$VIRTUALENVWRAPPER_HOOK_DIR/${venv}/bin/activate
-        export venv ativa
-        . ${ativa}
-        pip3 install cython==0.23
-        pip3 install --upgrade numpy kivy pygame urllib3 beautifulsoup4 lxml html5lib kivy-garden jupyter dryscrape
-        /opt/pycharm-community-*/bin/pycharm.sh ~/PycharmProjects/${projeto} &
-        sleep 3
-        jupyter notebook  ~/PycharmProjects/${projeto} &
-        exit 0
-    fi
+    clear
+    echo "A preparar o ambiente de desenvolvomento Kivy para o projeto: "${projeto}" no abiente" ${venv}
+    read -p 'Pressione qualquer tecla para continuar: ' q
+    virtualenv -p python3.5 $VIRTUALENVWRAPPER_HOOK_DIR/${venv}
+    ativa=$VIRTUALENVWRAPPER_HOOK_DIR/${venv}/bin/activate
+    export venv ativa
+    . ${ativa}
+    pip3 install cython==0.23
+    pip3 install --upgrade numpy kivy pygame urllib3 beautifulsoup4 lxml html5lib kivy-garden jupyter dryscrape
+    /opt/pycharm-community-*/bin/pycharm.sh ~/PycharmProjects/${projeto} &
+    sleep 3
+    jupyter notebook  ~/PycharmProjects/${projeto} &
+    exit 0
 elif test $opcao = 'c' || test $opcao = 'C' || test $opcao = 'cancela' || test $opcao = 'Cancela' || test $opcao = 'CANCELA'; then
     sudo rm -r ~/${projeto}
     exit 0
