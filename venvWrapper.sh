@@ -1,5 +1,4 @@
 #!/bin/bash
-#https://github.com/tmenegaz/AmbienteDev
 touch /tmp/atualiza.sh
 echo '
 #!/bin/bash
