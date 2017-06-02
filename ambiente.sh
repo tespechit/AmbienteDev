@@ -1,7 +1,6 @@
 #!/bin/bash
 clear
 sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove -y
-
 clear
 ## dependências para o sistema
 sudo apt install -y \
