@@ -33,7 +33,7 @@ versaoVelha=`echo /opt/pycharm-community-* | sed "s/.*-//"`
 # read -p 'Pressione qualquer tecla para continuar: ' q
 if test ${versaoNova} != ${versaoVelha}; then
     wget -c -q -P /tmp/ https://download.jetbrains.com/python/pycharm-community-${versaoNova}.tar.gz
-    wget -c -q -P /tmp/  https://github.com/Zen-CODE/kivybits/blob/master/IDE/PyCharm_kv_completion.jar
+    wget -c -q -P /tmp/ https://raw.githubusercontent.com/Zen-CODE/kivybits/master/IDE/PyCharm_kv_completion.jar
     sudo chmod +x /tmp/pycharm-community-${versaoNova}.tar.gz
     sudo chmod +x /tmp/PyCharm_kv_completion.jar
     sudo tar xvzf /tmp/pycharm-community-${versaoNova}.tar.gz -C /opt/
