@@ -65,9 +65,6 @@ mkdir -p ~/PycharmProjects/${projeto}/src/controller/logica
 
 touch ~/PycharmProjects/${projeto}/src/main.py
 echo "
-import kivy
-kivy.require('1.7.0')
-
 import src.myApp as app
 
 if __name__ == '__main__':
